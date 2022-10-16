@@ -27,6 +27,7 @@ jobs:
           echo "git config setup complete."
           
           rm -f $REPOSITORY/automatic/*
+          touch $REPOSITORY/automatic
           touch $REPOSITORY/automatic/${TIME}.json
           echo "update daily commit file."
           
