@@ -16,19 +16,22 @@ jobs:
   daily-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup
+      - name: Update file
         id: time
         uses: nanzm/get-time-action@v1.1
         with:
           timeZone: $TIMEZONE
           format: 'YYYY-MM-DD'
-
-      - name: Update file
         run:
           - rm -f $DIR/*
           - touch $DIR/$TIME
 
       - name: Commit & Push file
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: $TIMEZONE
+          format: 'YYYY-MM-DD'
         run:
           - cd $WORKSPACE
           - git add -A
