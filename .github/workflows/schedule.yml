@@ -26,14 +26,15 @@ jobs:
           git config user.email molruexception.com
           echo "git config setup complete."
           
-          rm -f $REPOSITORY/daily-commit-machine/*
-          mkdir -p $REPOSITORY/daily-commit-machine/${TIME}.json
+          rm -f $REPOSITORY/automatic/*
+          mkdir -p $REPOSITORY/automatic/${TIME}.json
           echo "update daily commit file."
           
           git add -A
           git commit -am "$TIME"
-          git push
-          echo "finish."
+          git push origin master
+          echo "push daily commit file."
+          echo "job complete."
           
         env:
           TIME: ${{ steps.time.outputs.time }}
