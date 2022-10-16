@@ -16,14 +16,14 @@ jobs:
       - name: Run daily commit machine
         run: |
           git --version
+          git clone ${REPOSITORY}.git
+          cd $REPOSITORY
           git config user.name $GIT_USER
           echo "git config user.name $GIT_USER"
           git config user.email $GIT_EMAIL
           echo "git config user.email $GIT_EMAIL"
-          git clone ${REPOSITORY}.git
           rm -f $DIR/*
           touch $DIR/$TIME
-          cd $WORKSPACE
           git add -A
           git commit -am "$TIME"
           git push
