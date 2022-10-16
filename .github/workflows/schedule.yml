@@ -21,6 +21,7 @@ jobs:
           git --version
           git config --global user.name 'daily-commit-machine'
           git config --global user.email 'molruexception.com'
+          
           git commit -am "Auto committed at $(date +'%Y-%m-%d')"
           git push
           
