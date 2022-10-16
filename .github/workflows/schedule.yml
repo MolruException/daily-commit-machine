@@ -14,15 +14,15 @@ jobs:
           timeZone: 9 # UTC
           format: 'YYYY-MM-DD'
       - run:
+        - git clone $REPOSITORY.git
         - rm -f $DIR/*
         - touch $DIR/$TIME
         - cd $WORKSPACE
         - git add -A
         - git commit -am "$TIME"
         - git push
-
         env:
+          REPOSITORY: github.com/${{ github.repository }}
+          DIR: $REPOSITORY/automatic
           TIME: ${{ steps.time.outputs.time }}
-          WORKSPACE: ${{ github.workspace }}
-          DIR: $WORKSPACE/automatic
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
