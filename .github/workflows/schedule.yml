@@ -15,16 +15,13 @@ jobs:
           format: 'YYYY-MM-DD'
       - name: Run daily commit machine
         run: |
-          IN = "${{ github.repository }}"
-          arrIN = (${IN//// })
-          echo "DIR=${arrIN[1]}" >> $GITHUB_ENV
           git --version
-          git clone $REPOSITORY
-          cd $DIR
+          git clone $GIT_REMOTE
+          cd $REPOSITORY
           git config user.name daily-commit-machine
           git config user.email molruexception.com
-          rm -f $DIR/daily-commit-machine/*
-          mkdir -p $DIR/daily-commit-machine/${TIME}.json
+          rm -f $REPOSITORY/daily-commit-machine/*
+          mkdir -p $REPOSITORY/daily-commit-machine/${TIME}.json
           git add -A
           git commit -am "$TIME"
           git push
@@ -32,4 +29,5 @@ jobs:
           TIME: ${{ steps.time.outputs.time }}
           USERNAME: MolruException
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          REPOSITORY: https://${USERNAME}:${GH_TOKEN}@github.com/${{ github.repository }}.git
+          GIT_REMOTE: https://${USERNAME}:${GH_TOKEN}@github.com/${{ github.repository }}.git
+          REPOSITORY: daily-commit-machine
