@@ -9,30 +9,18 @@ jobs:
   daily-commit:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Run daily commit machine
         run: |
           sudo timedatectl set-timezone $TIMEZONE
           echo "Set timezone to ${TIMEZONE}"
-          echo "Set time to $(date +'%Y-%m-%d')"
           
-          git --version
-          git clone $GIT_REMOTE
-          echo "git clone complete."
-          
-          cd $REPOSITORY
-          echo "found cloned repository."
-          
-          git config user.name daily-commit-machine
-          git config user.email molruexception.com
-          echo "git config setup complete."
-          
-          rm -f automatic
-          mkdir -p automatic
-          touch $(date +'%Y-%m-%d').json
-          ls -ld automatic/$(date +'%Y-%m-%d').json
+          date +%s > daily-commit-machine.csv
           echo "update daily commit file."
           
-          git add -A
+          git --version
+          git config --global user.name 'daily-commit-machine'
+          git config --global user.email 'molruexception.com'
           git commit -am "Auto committed at $(date +'%Y-%m-%d')"
           git push
           
@@ -41,7 +29,7 @@ jobs:
           
         env:
           TIMEZONE: Asia/Seoul
-          GH_USERNAME: MolruException
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GIT_REMOTE: https://${GH_USERNAME}:${GH_TOKEN}@github.com/${{ github.repository }}.git
-          REPOSITORY: daily-commit-machine
+          # GH_USERNAME: MolruException
+          # GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          # GIT_REMOTE: https://${GH_USERNAME}:${GH_TOKEN}@github.com/${{ github.repository }}.git
+          # REPOSITORY: daily-commit-machine
