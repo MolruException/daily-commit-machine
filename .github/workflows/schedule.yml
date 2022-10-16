@@ -9,12 +9,12 @@ jobs:
   daily-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: nanzm/get-time-action@v1.1
-        with:
-          timeZone: 9 # UTC
-          format: 'YYYY-MM-DD'
       - name: Run daily commit machine
         run: |
+          sudo timedatectl set-timezone "${TIMEZONE}" 
+          echo "Set timezone to ${TIMEZONE}."
+          echo "TIME=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+          
           git --version
           git clone $GIT_REMOTE
           echo "git clone complete."
@@ -28,17 +28,17 @@ jobs:
           
           rm -f automatic
           mkdir automatic
-          touch automatic/AUTO-${TIME}.json
+          touch automatic/AUTO-${{ env.GITHUB_SHA_SHORT }}.json
           echo "update daily commit file."
           
           git add -A
-          git commit -am "Auto committed at ${TIME}"
+          git commit -am "Auto committed at ${{ env.GITHUB_SHA_SHORT }}"
           git push $GIT_REMOTE
           echo "push daily commit file."
           echo "job complete."
           
         env:
-          TIME: ${{ steps.time.outputs.time }}
+          TIMEZONE: Asia/Seoul
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_REMOTE: https://${GH_TOKEN}@github.com/${{ github.repository }}.git
           REPOSITORY: daily-commit-machine
