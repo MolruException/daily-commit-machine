@@ -14,6 +14,7 @@ jobs:
           sudo timedatectl set-timezone $TIMEZONE
           echo "Set timezone to ${TIMEZONE}"
           echo "TIME=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+          echo "Set time to ${date +'%Y-%m-%d'}"
           
           git --version
           git clone $GIT_REMOTE
