@@ -32,7 +32,7 @@ jobs:
           echo "update daily commit file."
           
           git add -A
-          git commit -am "$TIME"
+          git commit -am "${TIME}"
           git push origin master
           echo "push daily commit file."
           echo "job complete."
