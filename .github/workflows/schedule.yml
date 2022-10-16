@@ -17,7 +17,7 @@ jobs:
         run: |
           git --version
           git clone ${REPOSITORY}.git
-          cd $REPOSITORY
+          cd $DIR
           git config user.name $GIT_USER
           echo "git config user.name $GIT_USER"
           git config user.email $GIT_EMAIL
@@ -31,6 +31,6 @@ jobs:
           GIT_USER: daily-commit-machine
           GIT_EMAIL: molruexception@gmail.com
           REPOSITORY: https://github.com/${{ github.repository }}
-          DIR: $REPOSITORY/automatic
+          DIR: ${{ github.repository }}/automatic
           TIME: ${{ steps.time.outputs.time }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
