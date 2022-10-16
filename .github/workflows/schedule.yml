@@ -13,7 +13,6 @@ jobs:
         run: |
           sudo timedatectl set-timezone $TIMEZONE
           echo "Set timezone to ${TIMEZONE}"
-          echo "TIME=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           echo "Set time to $(date +'%Y-%m-%d')"
           
           git --version
@@ -28,14 +27,12 @@ jobs:
           echo "git config setup complete."
           
           rm -f automatic
-          mkdir automatic
-          touch automatic/AUTO-${{ env.TIME }}.json
+          mkdir automatic/AUTO-$(date +'%Y-%m-%d').json
           echo "update daily commit file."
           
           git add -A
-          git commit -am "Auto committed at ${{ env.TIME }}"
-          git remote set-url origin $GIT_REMOTE
-          git push $GIT_REMOTE
+          git commit -am "Auto committed at $(date +'%Y-%m-%d')"
+          git push
           
           echo "push daily commit file."
           echo "job complete."
