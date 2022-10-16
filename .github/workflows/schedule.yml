@@ -19,8 +19,8 @@ jobs:
           echo "update daily commit file."
           
           git --version
-          git config --global user.name '${{ github.repository_owner }}'
-          git config --global user.email 'molruexception.com'
+          git config --global user.name '${USERNAME}'
+          git config --global user.email '${EMAIL}'
           
           git add -A
           git commit -am "Auto committed at $(date +'%Y-%m-%d')"
@@ -28,6 +28,7 @@ jobs:
           
           echo "push daily commit file."
           echo "job complete."
-          
         env:
           TIMEZONE: Asia/Seoul
+          USERNAME: ${{ github.repository_owner }}
+          EMAIL: molruexception@gmail.com
