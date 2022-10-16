@@ -30,7 +30,7 @@ jobs:
         env:
           GIT_USER: daily-commit-machine
           GIT_EMAIL: molruexception@gmail.com
-          REPOSITORY: github.com/${{ github.repository }}
+          REPOSITORY: https://github.com/${{ github.repository }}
           DIR: $REPOSITORY/automatic
           TIME: ${{ steps.time.outputs.time }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
