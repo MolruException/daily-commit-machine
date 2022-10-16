@@ -9,31 +9,21 @@ jobs:
   daily-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Update file
-        id: time
-        uses: nanzm/get-time-action@v1.1
-        with:
-          timeZone: $TIMEZONE
-          format: 'YYYY-MM-DD'
-        run:
-          - rm -f $DIR/*
-          - touch $DIR/$TIME
-
-      - name: Commit & Push file
-        id: time
-        uses: nanzm/get-time-action@v1.1
-        with:
-          timeZone: $TIMEZONE
-          format: 'YYYY-MM-DD'
-        run:
-          - cd $WORKSPACE
-          - git add -A
-          - git commit -am "$TIME"
-          - git push
-          
-      env:
-        TIMEZONE: 9 # UTC
-        TIME: ${{ steps.time.outputs.time }}
-        WORKSPACE: ${{ github.workspace }}
-        DIR: $WORKSPACE/automatic
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - uses: nanzm/get-time-action@v1.1
+          id: time
+          with:
+            timeZone: $TIMEZONE
+            format: 'YYYY-MM-DD'
+      - run:
+        - rm -f $DIR/*
+        - touch $DIR/$TIME
+        - cd $WORKSPACE
+        - git add -A
+        - git commit -am "$TIME"
+        - git push
+      - env:
+          TIMEZONE: 9 # UTC
+          TIME: ${{ steps.time.outputs.time }}
+          WORKSPACE: ${{ github.workspace }}
+          DIR: $WORKSPACE/automatic
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
