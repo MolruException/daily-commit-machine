@@ -33,13 +33,12 @@ jobs:
           
           git add -A
           git commit -am "Auto committed at ${TIME}"
-          git push origin master
+          git push $GIT_REMOTE
           echo "push daily commit file."
           echo "job complete."
           
         env:
           TIME: ${{ steps.time.outputs.time }}
-          USERNAME: MolruException
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GIT_REMOTE: https://${USERNAME}:${GH_TOKEN}@github.com/${{ github.repository }}.git
+          GIT_REMOTE: https://${GH_TOKEN}@github.com/${{ github.repository }}.git
           REPOSITORY: daily-commit-machine
