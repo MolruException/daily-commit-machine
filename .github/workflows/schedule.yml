@@ -11,8 +11,8 @@ jobs:
     steps:
       - name: Run daily commit machine
         run: |
-          sudo timedatectl set-timezone "${TIMEZONE}" 
-          echo "Set timezone to ${TIMEZONE}."
+          sudo timedatectl set-timezone Asia/Seoul 
+          echo "Set timezone to Asia/Seoul"
           echo "TIME=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           
           git --version
@@ -40,7 +40,7 @@ jobs:
           echo "job complete."
           
         env:
-          TIMEZONE: Asia/Seoul
+          GH_USERNAME: MolruException
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GIT_REMOTE: https://${GH_TOKEN}@github.com/${{ github.repository }}.git
+          GIT_REMOTE: https://${GH_USERNAME}:${GH_TOKEN}@github.com/${{ github.repository }}.git
           REPOSITORY: daily-commit-machine
