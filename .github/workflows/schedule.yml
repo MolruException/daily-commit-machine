@@ -11,8 +11,8 @@ jobs:
     steps:
       - name: Run daily commit machine
         run: |
-          sudo timedatectl set-timezone Asia/Seoul 
-          echo "Set timezone to Asia/Seoul"
+          sudo timedatectl set-timezone $TIMEZONE
+          echo "Set timezone to ${TIMEZONE}"
           echo "TIME=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           
           git --version
@@ -28,18 +28,19 @@ jobs:
           
           rm -f automatic
           mkdir automatic
-          touch automatic/AUTO-${{ env.GITHUB_SHA_SHORT }}.json
+          touch automatic/AUTO-${{ env.TIME }}.json
           echo "update daily commit file."
           
           git add -A
-          git commit -am "Auto committed at ${{ env.GITHUB_SHA_SHORT }}"
+          git commit -am "Auto committed at ${{ env.TIME }}"
           git remote set-url origin $GIT_REMOTE
-          git push
+          git push $GIT_REMOTE
           
           echo "push daily commit file."
           echo "job complete."
           
         env:
+          TIMEZONE: Asia/Seoul
           GH_USERNAME: MolruException
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_REMOTE: https://${GH_USERNAME}:${GH_TOKEN}@github.com/${{ github.repository }}.git
