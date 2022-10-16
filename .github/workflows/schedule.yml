@@ -26,9 +26,9 @@ jobs:
           git config user.email molruexception.com
           echo "git config setup complete."
           
-          rm -f $REPOSITORY/automatic/*
-          touch $REPOSITORY/automatic
-          touch $REPOSITORY/automatic/${TIME}.json
+          rm -f automatic
+          mkdir automatic
+          touch automatic/${TIME}.json
           echo "update daily commit file."
           
           git add -A
