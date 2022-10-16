@@ -17,14 +17,24 @@ jobs:
         run: |
           git --version
           git clone $GIT_REMOTE
+          echo "git clone complete."
+          
           cd $REPOSITORY
+          echo "found cloned repository."
+          
           git config user.name daily-commit-machine
           git config user.email molruexception.com
+          echo "git config setup complete."
+          
           rm -f $REPOSITORY/daily-commit-machine/*
           mkdir -p $REPOSITORY/daily-commit-machine/${TIME}.json
+          echo "update daily commit file."
+          
           git add -A
           git commit -am "$TIME"
           git push
+          echo "finish."
+          
         env:
           TIME: ${{ steps.time.outputs.time }}
           USERNAME: MolruException
