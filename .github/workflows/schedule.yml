@@ -19,8 +19,8 @@ jobs:
           echo "update daily commit file."
           
           git --version
-          git config --global user.name '${USERNAME}'
-          git config --global user.email '${EMAIL}'
+          git config --global user.name $USERNAME
+          git config --global user.email $EMAIL
           
           git add -A
           git commit -am "Auto committed at $(date +'%Y-%m-%d')"
