@@ -2,7 +2,7 @@ name: Run daily commit machine
 
 on:
   schedule:
-    - cron: "0 0 0 * *"
+    - cron: "0 0 * * *"
 
 env:
   TIMEZONE: 9 # UTC
