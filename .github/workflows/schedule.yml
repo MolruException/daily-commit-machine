@@ -12,23 +12,24 @@ env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Setup
-      id: time
-      uses: nanzm/get-time-action@v1.1
-      with:
-        timeZone: $TIMEZONE
-        format: 'YYYY-MM-DD'
+  daily-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: $TIMEZONE
+          format: 'YYYY-MM-DD'
 
-    - name: Update file
-      run:
-        - rm -f $DIR/*
-        - touch $DIR/$TIME
+      - name: Update file
+        run:
+          - rm -f $DIR/*
+          - touch $DIR/$TIME
 
-    - name: Commit & Push file
-      run:
-        - cd $WORKSPACE
-        - git add -A
-        - git commit -am "$TIME"
-        - git push
+      - name: Commit & Push file
+        run:
+          - cd $WORKSPACE
+          - git add -A
+          - git commit -am "$TIME"
+          - git push
