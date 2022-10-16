@@ -31,7 +31,3 @@ jobs:
           
         env:
           TIMEZONE: Asia/Seoul
-          # GH_USERNAME: MolruException
-          # GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          # GIT_REMOTE: https://${GH_USERNAME}:${GH_TOKEN}@github.com/${{ github.repository }}.git
-          # REPOSITORY: daily-commit-machine
