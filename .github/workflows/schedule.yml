@@ -28,7 +28,8 @@ jobs:
           
           rm -f automatic
           mkdir -p automatic
-          touch AUTO-$(date +'%Y-%m-%d').json
+          touch $(date +'%Y-%m-%d').json
+          ls -ld automatic/$(date +'%Y-%m-%d').json
           echo "update daily commit file."
           
           git add -A
