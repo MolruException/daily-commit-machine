@@ -15,7 +15,7 @@ jobs:
           sudo timedatectl set-timezone $TIMEZONE
           echo "Set timezone to ${TIMEZONE}"
           
-          date +'%Y-%m-%d' > daily-commit-machine.csv
+          openssl rand -hex 12 > daily-commit-machine.csv
           echo "update daily commit file."
           
           git --version
