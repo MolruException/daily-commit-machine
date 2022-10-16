@@ -10,10 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: nanzm/get-time-action@v1.1
-          id: time
-          with:
-            timeZone: $TIMEZONE
-            format: 'YYYY-MM-DD'
+        with:
+          timeZone: $TIMEZONE
+          format: 'YYYY-MM-DD'
       - run:
         - rm -f $DIR/*
         - touch $DIR/$TIME
@@ -22,8 +21,8 @@ jobs:
         - git commit -am "$TIME"
         - git push
       - env:
-          TIMEZONE: 9 # UTC
-          TIME: ${{ steps.time.outputs.time }}
-          WORKSPACE: ${{ github.workspace }}
-          DIR: $WORKSPACE/automatic
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        TIMEZONE: 9 # UTC
+        TIME: ${{ steps.time.outputs.time }}
+        WORKSPACE: ${{ github.workspace }}
+        DIR: $WORKSPACE/automatic
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
