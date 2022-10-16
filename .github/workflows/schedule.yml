@@ -19,7 +19,7 @@ jobs:
           echo "update daily commit file."
           
           git --version
-          git config --global user.name 'daily-commit-machine'
+          git config --global user.name '${{ github.repository_owner }}'
           git config --global user.email 'molruexception.com'
           
           git add -A
