@@ -33,7 +33,8 @@ jobs:
           
           git add -A
           git commit -am "Auto committed at ${{ env.GITHUB_SHA_SHORT }}"
-          git push $GIT_REMOTE
+          git remote set-url origin $GIT_REMOTE
+          
           echo "push daily commit file."
           echo "job complete."
           
