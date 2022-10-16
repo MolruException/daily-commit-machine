@@ -4,6 +4,13 @@ on:
   schedule:
     - cron: "0 0 0 * *"
 
+env:
+  TIMEZONE: 9 # UTC
+  TIME: ${{ steps.time.outputs.time }}
+  WORKSPACE: ${{ github.workspace }}
+  DIR: $WORKSPACE/automatic
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
 jobs:
   runs-on: ubuntu-latest
   steps:
@@ -20,14 +27,8 @@ jobs:
         - touch $DIR/$TIME
 
     - name: Commit & Push file
+      run:
         - cd $WORKSPACE
         - git add -A
         - git commit -am "$TIME"
         - git push
-
-    env:
-      TIMEZONE: 9 # UTC
-      TIME: ${{ steps.time.outputs.time }}
-      WORKSPACE: ${{ github.workspace }}
-      DIR: $WORKSPACE/automatic
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
