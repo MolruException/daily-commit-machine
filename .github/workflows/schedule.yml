@@ -28,11 +28,11 @@ jobs:
           
           rm -f automatic
           mkdir automatic
-          touch automatic/${TIME}.json
+          touch automatic/AUTO-${TIME}.json
           echo "update daily commit file."
           
           git add -A
-          git commit -am "${TIME}"
+          git commit -am "Auto committed at ${TIME}"
           git push origin master
           echo "push daily commit file."
           echo "job complete."
