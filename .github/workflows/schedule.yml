@@ -13,23 +13,24 @@ jobs:
         with:
           timeZone: 9 # UTC
           format: 'YYYY-MM-DD'
-      - run:
-        - sudo apt-get install git
-        - sudo apt install git
-        - git --version
-        - git config user.name $GIT_USER
-        - git config user.email $GIT_EMAIL
-        - git clone $REPOSITORY.git
-        - rm -f $DIR/*
-        - touch $DIR/$TIME
-        - cd $WORKSPACE
-        - git add -A
-        - git commit -am "$TIME"
-        - git push
-        env:
-          GIT_USER: daily-commit-machine
-          GIT_EMAIL: molruexception@gmail.com
-          REPOSITORY: github.com/${{ github.repository }}
-          DIR: $REPOSITORY/automatic
-          TIME: ${{ steps.time.outputs.time }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Run daily commit machine
+        run: |
+        sudo apt-get install git
+        sudo apt install git
+        git --version
+        git config user.name $GIT_USER
+        git config user.email $GIT_EMAIL
+        git clone $REPOSITORY.git
+        rm -f $DIR/*
+        touch $DIR/$TIME
+        cd $WORKSPACE
+        git add -A
+        git commit -am "$TIME"
+        git push
+      env:
+        GIT_USER: daily-commit-machine
+        GIT_EMAIL: molruexception@gmail.com
+        REPOSITORY: github.com/${{ github.repository }}
+        DIR: $REPOSITORY/automatic
+        TIME: ${{ steps.time.outputs.time }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
