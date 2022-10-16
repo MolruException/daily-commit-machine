@@ -15,12 +15,12 @@ jobs:
           format: 'YYYY-MM-DD'
       - name: Run daily commit machine
         run: |
-          sudo apt-get install git
-          sudo apt install git
           git --version
           git config user.name $GIT_USER
+          echo "git config user.name $GIT_USER"
           git config user.email $GIT_EMAIL
-          git clone $REPOSITORY.git
+          echo "git config user.email $GIT_EMAIL"
+          git clone ${REPOSITORY}.git
           rm -f $DIR/*
           touch $DIR/$TIME
           cd $WORKSPACE
